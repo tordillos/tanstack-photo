@@ -10,7 +10,8 @@
     "start": "vinxi start",
     "lint": "eslint . ",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json)\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "clean": "rm -rf dist && rm -rf .vinxi && rm -rf .wrangler "
   },
   "keywords": [],
   "author": "",
