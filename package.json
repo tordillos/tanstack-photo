@@ -9,18 +9,23 @@
     "build": "vinxi build",
     "start": "vinxi start",
     "lint": "eslint . ",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json)\""
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json)\"",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^8.2.4",
     "@tanstack/react-router": "^1.58.11",
     "@tanstack/start": "^1.58.11",
     "@vitejs/plugin-react": "^4.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "secretlint": "^8.2.4",
     "vinxi": "^0.4.3"
   },
   "devDependencies": {
@@ -31,9 +36,28 @@
     "eslint": "^9.11.1",
     "eslint-plugin-react": "^7.37.0",
     "globals": "^15.9.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "only-allow": "^1.2.1",
     "prettier": "3.3.3",
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.7.0"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*": [
+      "secretlint"
+    ],
+    "**/*.+(js|jsx|ts|tsx)": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.+(json|md|mdx)": [
+      "prettier --write"
+    ]
   }
 }
