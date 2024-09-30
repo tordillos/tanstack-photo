@@ -4,6 +4,7 @@ import { Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import * as React from "react";
 import appCss from "@/styles/app.css?url";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const Route = createRootRoute({
   meta: () => [
@@ -19,20 +20,23 @@ export const Route = createRootRoute({
     },
   ],
   links: () => [{ rel: "stylesheet", href: appCss }],
+  notFoundComponent: () => <div>Not Found</div>,
   component: RootComponent,
 });
 
 function RootComponent() {
   return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <RootDocument>
+        <Outlet />
+      </RootDocument>
+    </ThemeProvider>
   );
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <Html>
+    <Html suppressHydrationWarning>
       <Head>
         <Meta />
       </Head>
